@@ -7,7 +7,7 @@
 ** -------------------------------------------------------------------------*/
 
 #include "MinerGame.h"
-#include "GridScene.h"
+#include "scenes/GridScene.h"
 
 #include <core/GameConfig.h>
 #include <core/SceneManager.h>
@@ -29,6 +29,15 @@ namespace miner
     {
         Game::init();
 
+        gDisplayConfig::instance().setWindowWidth(640);
+        gDisplayConfig::instance().setWindowHeight(480);
+
+        
+        
+        gDisplayConfig::instance().registerLayer( K_GAMELAYER_DEFAULT, sOriginPoint );
+        gDisplayConfig::instance().registerLayer( K_GAMELAYER_BACKGROUND, sOriginPoint );
+        
+
         bool success = true;
 
         success &= gSDLConfig::instance().initVideo();
@@ -38,6 +47,7 @@ namespace miner
         success &= gSDLConfig::instance().initFont();
         success &= gSDLConfig::instance().initSound();
         setGameRunning(success);
+       
 
         m_sceneManagerPtr->registerScene(GridScene::sTypeName, GridScene::create);
     }
@@ -48,8 +58,10 @@ namespace miner
         Game::load();
 
         Scene* scene = m_sceneManagerPtr->addScene( GridScene::sTypeName, "GridScene" );
+
         DEBUG_ASSERT( scene != NULL )
         m_sceneManagerPtr->setCurrentScene(scene->getName());
+
     }
 
 

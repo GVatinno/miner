@@ -55,6 +55,9 @@ namespace core
         
         static DisplayConfig*   create()                                        { return new DisplayConfig(); }
 
+        inline void             setPixelPerUnit( unsigned int pixel )           { m_pixelPerUnit = pixel; }
+        inline unsigned int     getPixelPerUnit() const                          { return m_pixelPerUnit; }
+
         inline void             setWindowWidth( unsigned int width)             { m_windowWidth = width; }
         inline unsigned int     getWindowWidth() const                          { return m_windowWidth; }
 
@@ -67,14 +70,21 @@ namespace core
         inline void             setWindowPosY( unsigned int y)                  { m_windowPosY = y; }
         inline unsigned int     getWindowPosY() const                           { return m_windowPosY; }
 
+
+
+        void                    registerLayer(unsigned int layer, const Point& p );
+        const Point&            getLayer(unsigned int layer ) const;
+
     private:
                                 DisplayConfig();
 
 
+        unsigned int m_pixelPerUnit;
         unsigned int m_windowWidth;
         unsigned int m_windowHeight;
         unsigned int m_windowPosX;
         unsigned int m_windowPosY;
+        PointMap     m_layerMap;
     };
 
 
@@ -94,6 +104,8 @@ namespace core
         bool                    initWindow(const std::string& gameName,int flags=0);
         bool                    initRenderer(int flags=0);
 
+        SDL_Renderer*           getRenderer() const;
+        SDL_Window*             getWindow() const;
         
 
     private:

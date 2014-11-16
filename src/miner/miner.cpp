@@ -7,7 +7,7 @@
 ** -------------------------------------------------------------------------*/
 
 #include "miner.h"
-#include "GridScene.h"
+#include "scenes/GridScene.h"
 
 
 namespace miner

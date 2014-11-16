@@ -9,7 +9,7 @@
 #ifndef GRID_SCENE_H
 #define GRID_SCENE_H
 
-#include "miner.h"
+#include "../miner.h"
 #include <core/Scene.h>
 
 namespace miner 
@@ -25,9 +25,23 @@ namespace miner
 
         static Scene*           create(const std::string& name)                 { return new GridScene(name); }
 
+        void                    init();
+        void                    load();
+
+        void                    processInput(InputEvent& e);
+
+        void                    update();
+        void                    draw();
+
     protected:
 
-                                GridScene(const std::string& name): Scene(name) {}
+                                GridScene(const std::string& name);
+
+    private:
+
+        GridModelPtr            m_gridModel;
+        GridControllerPtr       m_gridController;
+        GridViewPtr             m_gridView;
 
    };
 

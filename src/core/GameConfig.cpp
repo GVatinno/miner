@@ -29,12 +29,37 @@ namespace core
     //
 
     DisplayConfig::DisplayConfig()
-    : m_windowWidth(800),
+    : m_pixelPerUnit(24),
+      m_windowWidth(800),
       m_windowHeight(600),
       m_windowPosX(100),
-      m_windowPosY(100)
+      m_windowPosY(100),
+      m_layerMap( )
     {
     }
+
+
+    void DisplayConfig::registerLayer(unsigned int layer, const Point& p )
+    {
+        DEBUG_ASSERT( m_layerMap.find( layer ) == m_layerMap.end() )
+        if ( m_layerMap.find( layer ) == m_layerMap.end() )
+        {
+            m_layerMap.insert( std::make_pair(layer, p ) );
+        }
+    }
+        
+
+    const Point& DisplayConfig::getLayer(unsigned int layer ) const
+    {
+        PointMapItC it = m_layerMap.find( layer );
+        DEBUG_ASSERT( it != m_layerMap.end() )
+        if ( it != m_layerMap.end() )
+        {
+            return it->second;
+        }
+        return sOriginPoint;
+    }
+
           
      
     //
@@ -186,6 +211,20 @@ namespace core
             return false;
         }
         return true;
+    }
+
+
+    SDL_Renderer* SDLConfig::getRenderer() const
+    { 
+        DEBUG_ASSERT( m_renderer != NULL )
+        return m_renderer; 
+    }
+    
+
+    SDL_Window* SDLConfig::getWindow() const
+    { 
+        DEBUG_ASSERT( m_window != NULL )
+        return m_window; 
     }
 
 } // end namespace core

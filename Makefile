@@ -2,10 +2,10 @@
 
 ifeq ($(BUILD),debug)
 	BUILD_SUFFIX = -d
-	BUILD_FLAGS = -g -Wall -D_DEBUG
+	BUILD_FLAGS = -g -Wall -Wno-unused -Wno-unused-variable -D_DEBUG
 else
 	BUILD_SUFFIX = 
-	BUILD_FLAGS = -O2 -Wall
+	BUILD_FLAGS = -O2 -Wall -Wno-unused -Wno-unused-variable
 endif
 
 #OBJS specifies which files to compile as part of the project
@@ -17,11 +17,25 @@ OBJS_CORE = \
 	src/core/Game.cpp						\
 	src/core/GameConfig.cpp					\
 	src/core/SceneManager.cpp				\
+	src/core/Texture.cpp					\
+	src/core/TextureSystem.cpp				\
+	src/core/Sprite.cpp						\
+	src/core/GridTraverser.cpp				\
+	src/core/AnimatedSprite.cpp				\
 
 OBJ_MINER = \
 	src/miner/miner.cpp						\
 	src/miner/MinerGame.cpp					\
-	src/miner/GridScene.cpp					\
+	src/miner/scenes/GridScene.cpp			\
+	src/miner/TEST/GridModel.cpp			\
+	src/miner/TEST/GridController.cpp		\
+	src/miner/TEST/GridView.cpp				\
+	src/miner/TEST/TileSprite.cpp			\
+	src/miner/TEST/gemSprite.cpp			\
+	src/miner/TEST/Logic.cpp				\
+	src/miner/TEST/Gem.cpp					\
+
+
 	
 
 #EXECUTABLE_NAME specifies the name of our exectuable

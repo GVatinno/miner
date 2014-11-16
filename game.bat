@@ -1,1 +1,2 @@
-bin/game.exe
+cd bin
+game.exe
