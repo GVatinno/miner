@@ -9,6 +9,8 @@
 #ifndef CORE_H
 #define CORE_H
 
+
+#include <GL/Glew.h>
 #include <SDL.h>
 #include <SDL_image.h>
 #include <SDL_mixer.h>

@@ -86,8 +86,10 @@ namespace core
         SDL_Quit();
 
         //Destroy window    
+        SDL_GL_DeleteContext(m_glContex);
         SDL_DestroyRenderer( m_renderer );
         SDL_DestroyWindow( m_window );
+        
     }
 
 
@@ -110,6 +112,7 @@ namespace core
             {
                 PRINT_WARNING("Linear texture filtering not enabled!", "")
             }
+            glewInit();
         }
         return m_videoInitialized;
     }
@@ -193,11 +196,23 @@ namespace core
             gDisplayConfig::instance().getWindowWidth(),
             gDisplayConfig::instance().getWindowHeight(),
             flags );
+        
         if( m_window == NULL )
         {
-            PRINT_ERROR( "Window could not be created!", SDL_GetError() );
+                PRINT_ERROR( "Window could not be created!", SDL_GetError() );
             return false;
         }
+
+        m_glContex = SDL_GL_CreateContext(m_window);
+        glViewport( 0, 0, ( GLsizei )gDisplayConfig::instance().getWindowWidth(), ( GLsizei )gDisplayConfig::instance().getWindowHeight() );
+
+        GLenum error = glGetError();
+        if( error != GL_NO_ERROR )
+        {
+            PRINT_ERROR( "Error initializing OpenGL!", gluErrorString( error ) );
+            return false;
+        }
+
         return true;
     }
 
@@ -225,6 +240,13 @@ namespace core
     { 
         DEBUG_ASSERT( m_window != NULL )
         return m_window; 
+    }
+
+    SDL_Surface* SDLConfig::getScreenSurface() const
+    {
+        DEBUG_ASSERT( m_window != NULL )
+        DEBUG_ASSERT( m_renderer != NULL )
+        return SDL_GetWindowSurface(m_window);
     }
 
 } // end namespace core

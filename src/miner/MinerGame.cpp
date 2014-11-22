@@ -41,7 +41,7 @@ namespace miner
         bool success = true;
 
         success &= gSDLConfig::instance().initVideo();
-        success &= gSDLConfig::instance().initWindow("Miner", SDL_WINDOW_SHOWN);
+        success &= gSDLConfig::instance().initWindow("Miner", SDL_WINDOW_SHOWN|SDL_WINDOW_OPENGL);
         success &= gSDLConfig::instance().initRenderer(SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         success &= gSDLConfig::instance().initImg(IMG_INIT_PNG);
         success &= gSDLConfig::instance().initFont();

@@ -153,7 +153,6 @@ namespace miner
             traverser.traverse( m_rows-1, i );
             if ( ! visitor.m_rowHoleQueue.empty() )
             {
-                std::cerr << i << std::endl;
                 for ( unsigned int h = 0; h < visitor.m_rowHoleQueue.size(); ++h )
                 {
                     Gem* gem = createGem( visitor.m_rowHoleQueue[h], i, randomGem() );
@@ -229,7 +228,6 @@ namespace miner
 
     bool GridModel::findMatch( unsigned int row, unsigned int col )
     {
-        std::cerr << "TILE " << row << " " << col << std::endl;
         Gem* gem = m_gems->getAt( row, col );
         DEBUG_ASSERT( gem != NULL )
 
@@ -245,7 +243,6 @@ namespace miner
             {
                 (*it)->setState(K_GEMTYPE_DYING);
             }
-            std::cerr << "MATCH " << visitor.m_matches << std::endl;
             return true;
         }    
         return false;

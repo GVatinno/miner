@@ -106,6 +106,7 @@ namespace core
 
         SDL_Renderer*           getRenderer() const;
         SDL_Window*             getWindow() const;
+        SDL_Surface*            getScreenSurface() const;
         
 
     private:
@@ -119,6 +120,7 @@ namespace core
 
         SDL_Window*     m_window;
         SDL_Renderer*   m_renderer;
+        SDL_GLContext   m_glContex;
     };
 
 } // end namespace core

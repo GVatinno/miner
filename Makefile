@@ -44,6 +44,7 @@ EXECUTABLE_NAME += bin/game$(BUILD_SUFFIX).exe
 INCLUDE_FOLDER 	= D:\WORKSPACE\include
 LIB_FOLDER 		= D:\WORKSPACE\lib
 MINGW_FOLDER 	= C:\MinGW\lib
+OPENGL_FOLDER 	= C:\Program\ Files\Microsoft\ SDKs\Windows\v7.1
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 INCLUDE_PATHS = \
@@ -52,6 +53,8 @@ INCLUDE_PATHS = \
 	-I $(INCLUDE_FOLDER)\SDL2_image\2.0.0 	\
 	-I $(INCLUDE_FOLDER)\SDL2_ttf\2.0.12 	\
 	-I $(INCLUDE_FOLDER)\SDL2_mixer\2.0.0	\
+	-I $(INCLUDE_FOLDER)\GLEW				\
+	-I $(OPENGL_FOLDER)\include
 
 
 	
@@ -63,6 +66,9 @@ LIB_PATHS = \
 	-L $(LIB_FOLDER)\SDL2_image\2.0.0 		\
 	-L $(LIB_FOLDER)\SDL2_ttf\2.0.12 		\
 	-L $(LIB_FOLDER)\SDL2_mixer\2.0.0 		\
+	-L $(LIB_FOLDER)\GLEW					\
+	-L $(OPENGL_FOLDER)\lib
+
 
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
@@ -71,7 +77,7 @@ COMPILER_FLAGS = -Wl,-subsystem,console $(BUILD_FLAGS)
 
 
 #LINKER_FLAGS specifies the libraries we're linking against
-LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer
+LINKER_FLAGS = -lmingw32 -lSDL2main -lSDL2 -lSDL2_image -lSDL2_ttf -lSDL2_mixer -lglew32 -lglu32 -lopengl32
 
 #This is the target that compiles our executable
 all : $(OBJS)

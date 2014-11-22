@@ -90,10 +90,10 @@ namespace miner
         }
         else if ( m_gem->getState() != K_GEMTYPE_DEAD  )
         {
-            Sprite::draw();
+            if ( m_gem->getPosY() >= 0 )
+                Sprite::draw();
         }
-        
-            
+
     }
 
 
