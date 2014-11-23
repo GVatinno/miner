@@ -20,25 +20,22 @@ namespace core
     {
 
     public:
-                                AnimatedSprite( const std::string& name, unsigned int spriteRow, unsigned int spriteCol,
+                                AnimatedSprite( const std::string& name, const std::string& animationDesc,
                                                 unsigned int x = 0, unsigned int y =0, unsigned int layer = 0 );
                                 
         virtual                 ~AnimatedSprite()                                       {}
 
 
         virtual void            next();
+        virtual unsigned int    getCurrentClip() const                          { return m_currentClip; }
 
 
         virtual void            draw();
 
     private:
 
-        unsigned int            m_spriteRow;
-        unsigned int            m_spriteCol;
-        unsigned int            m_currentRow;
-        unsigned int            m_currentCol;
-        RectVector              m_frames;
         unsigned int            m_currentClip;
+        AnimationDesc*          m_animDesc;
 
 
     };

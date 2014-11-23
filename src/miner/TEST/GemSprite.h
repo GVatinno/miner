@@ -31,7 +31,6 @@ namespace miner
         const Gem*          m_gem;
         AnimatedSpritePtr   m_dyingSprite;
         Uint8               m_dyingAlpha;
-        unsigned int        m_lastAnimFrame;
     };
 
 

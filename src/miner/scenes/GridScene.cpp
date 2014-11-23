@@ -15,6 +15,8 @@
 #include <core/TextureSystem.h>
 #include <core/Singleton.h>
 #include <core/GameConfig.h>
+#include <core/FontSystem.h>
+#include <core/AnimationSystem.h>
 
 namespace miner
 {
@@ -28,6 +30,7 @@ namespace miner
 
     void GridScene::init()
     {
+        // register texture
         gTextureSystem::instance().registerTexture( "../assets/background.png", "background", sWhiteColor );
         gTextureSystem::instance().registerTexture( "../assets/tile_default.png", "tile_default", sWhiteColor );
         gTextureSystem::instance().registerTexture( "../assets/gem-crystal.png", "gem-crystal", sWhiteColor );
@@ -37,6 +40,32 @@ namespace miner
         gTextureSystem::instance().registerTexture( "../assets/stone.png", "border", sWhiteColor );
         gTextureSystem::instance().registerTexture( "../assets/explotion.png", "explotion", sWhiteColor );
         gTextureSystem::instance().registerTexture( "../assets/smoke.png", "smoke", sWhiteColor );
+
+        // register fonts
+        gFontSystem::instance().registerFont( "../assets/lazy.ttf", "lazy-15", 15 );
+
+        // register animations
+
+        // smoke_animation
+        AnimationDesc* smoke_animation = new AnimationDesc();
+        // Could be read from a json file
+        { 
+            smoke_animation->frameDuration = 1;
+            RectVector& smoke_frames = smoke_animation->frameDesc;
+            smoke_frames.resize( 20 );
+
+            RectVectorIt it = smoke_frames.begin();
+            RectVectorIt it_end = smoke_frames.end();
+
+            for ( unsigned int w=0 ; it != it_end ; ++it, w+=24 )
+            {
+                it->w = 24;
+                it->h = 25;
+                it->x = w;
+                it->y = 0;
+            }
+        }
+        gAnimationSystem::instance().registerAnimation("smoke-animation", smoke_animation);
 
     }
     

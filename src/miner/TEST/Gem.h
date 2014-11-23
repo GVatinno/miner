@@ -36,7 +36,7 @@ namespace miner
     public:
                                 Gem( unsigned int row, unsigned int col, unsigned int gemType = K_GEMTYPE_CRYSTAL )
                                 : GridEntity( row, col, K_GAMELAYER_GEM ), 
-                                  m_gemType( gemType ), m_dyningFrame(20), m_currentDyingFrame( 0 ) {}
+                                  m_gemType( gemType ), m_dyningFrame(40), m_currentDyingFrame( 0 ) {}
 
         virtual                 ~Gem()                                          {}
 

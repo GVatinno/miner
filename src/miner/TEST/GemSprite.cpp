@@ -21,8 +21,8 @@ namespace {
 
     using namespace miner;
 
-    typedef std::map<unsigned int, std::string> MapGemTypeSprite;
-    typedef std::auto_ptr<MapGemTypeSprite> MapGemTypeSpritePtr; 
+    typedef boost::unordered_map<unsigned int, std::string> MapGemTypeSprite;
+    typedef std::auto_ptr<MapGemTypeSprite>                 MapGemTypeSpritePtr; 
 
     const std::string& getTextureNameFromType( unsigned int gemType )
     {
@@ -45,9 +45,8 @@ namespace miner
     GemSprite::GemSprite( const Entity* gem )
     : Sprite("", 0, 0, K_GAMELAYER_GEM ),
       m_gem( reinterpret_cast<const Gem*>(gem) ),
-      m_dyingSprite( new AnimatedSprite("smoke", 1 , 20, 0, 0, K_GAMELAYER_GEM ) ),
-      m_dyingAlpha(0xFF),
-      m_lastAnimFrame( 0)
+      m_dyingSprite( new AnimatedSprite("smoke", "smoke-animation", 0, 0, K_GAMELAYER_GEM ) ),
+      m_dyingAlpha(0xFF)
     {
         setTextureName(getTextureNameFromType(m_gem->getGemType()));
         Texture* tex = getTexture();
@@ -80,10 +79,9 @@ namespace miner
             m_dyingSprite->setScreenPosX( getScreenPosX() );
             m_dyingSprite->setScreenPosY( getScreenPosY() );
             m_dyingSprite->draw();
-            if ( m_gem->getCurentDyingFrame() > m_lastAnimFrame )
+            if ( m_gem->getCurentDyingFrame()/ 2 > m_dyingSprite->getCurrentClip() )
             {
                 m_dyingSprite->next();
-                m_lastAnimFrame = m_gem->getCurentDyingFrame();
                 m_dyingAlpha -= 0x9;
             }
             

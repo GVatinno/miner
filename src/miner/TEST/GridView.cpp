@@ -71,9 +71,9 @@ namespace miner
                 isDead ),
             m_decorationVector.end() );
 
-        RGBA back_color = { 0xFF, 0x00, 0x00, 0xFF };
-        SDL_SetRenderDrawColor( gSDLConfig::instance().getRenderer(), back_color.r, back_color.g, back_color.b, back_color.a );
-        SDL_RenderClear( gSDLConfig::instance().getRenderer() );
+        // RGBA back_color = { 0xFF, 0x00, 0x00, 0xFF };
+        // SDL_SetRenderDrawColor( gSDLConfig::instance().getRenderer(), back_color.r, back_color.g, back_color.b, back_color.a );
+        // SDL_RenderClear( gSDLConfig::instance().getRenderer() );
 
         DecorationVectorIt it = m_decorationVector.begin();
         DecorationVectorIt it_end = m_decorationVector.end();
@@ -83,7 +83,7 @@ namespace miner
             (*it)->draw();
         }
 
-        SDL_RenderPresent( gSDLConfig::instance().getRenderer() );
+        // SDL_RenderPresent( gSDLConfig::instance().getRenderer() );
     }
 
 } // end namespace miner

@@ -19,9 +19,11 @@ OBJS_CORE = \
 	src/core/SceneManager.cpp				\
 	src/core/Texture.cpp					\
 	src/core/TextureSystem.cpp				\
+	src/core/FontSystem.cpp					\
 	src/core/Sprite.cpp						\
 	src/core/GridTraverser.cpp				\
 	src/core/AnimatedSprite.cpp				\
+	src/core/AnimationSystem.cpp			\
 
 OBJ_MINER = \
 	src/miner/miner.cpp						\
@@ -45,6 +47,7 @@ INCLUDE_FOLDER 	= D:\WORKSPACE\include
 LIB_FOLDER 		= D:\WORKSPACE\lib
 MINGW_FOLDER 	= C:\MinGW\lib
 OPENGL_FOLDER 	= C:\Program\ Files\Microsoft\ SDKs\Windows\v7.1
+BOOST_FOLDER    = D:\WORKSPACE\lib_source\boost_1_55_0
 
 #INCLUDE_PATHS specifies the additional include paths we'll need
 INCLUDE_PATHS = \
@@ -54,7 +57,8 @@ INCLUDE_PATHS = \
 	-I $(INCLUDE_FOLDER)\SDL2_ttf\2.0.12 	\
 	-I $(INCLUDE_FOLDER)\SDL2_mixer\2.0.0	\
 	-I $(INCLUDE_FOLDER)\GLEW				\
-	-I $(OPENGL_FOLDER)\include
+	-I $(OPENGL_FOLDER)\include 			\
+	-I $(BOOST_FOLDER)
 
 
 	
@@ -73,7 +77,7 @@ LIB_PATHS = \
 #COMPILER_FLAGS specifies the additional compilation options we're using
 # -w suppresses all warnings
 # -Wl,-subsystem,windows gets rid of the console window
-COMPILER_FLAGS = -Wl,-subsystem,console $(BUILD_FLAGS)
+COMPILER_FLAGS = -Wl,-subsystem,console $(BUILD_FLAGS) -J 12
 
 
 #LINKER_FLAGS specifies the libraries we're linking against

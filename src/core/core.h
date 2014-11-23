@@ -16,6 +16,8 @@
 #include <SDL_mixer.h>
 #include <SDL_ttf.h>
 
+#include <stdio.h>
+#include <string.h>
 #include <string>
 #include <utility>
 #include <memory>
@@ -23,8 +25,12 @@
 #include <algorithm>
 #include <vector>
 #include <iostream>
-#include <set>
+#include <sstream>
 #include <deque>
+
+// boost include
+#include <boost/unordered_set.hpp>
+#include <boost/unordered_map.hpp>
 
 
 
@@ -44,11 +50,15 @@ namespace core
     class Decoration;
     class Texture;
     class TextureSystem;
+    class FontSystem;
     class Point;
     class GridTraverser;
     class DirectionalGridTraverser;
     class GridVisitor;
     class AnimatedSprite;
+    class AvgFPS;
+    class AnimationDesc;
+    class AnimationSystem;
     
 
     template < class T >
@@ -67,35 +77,50 @@ namespace core
     // type definitions
     //
 
-    typedef std::auto_ptr<SceneManager>         SceneManagerPtr;
+    typedef std::auto_ptr<SceneManager>                 SceneManagerPtr;
 
-    typedef Singleton<TimeConfig>               gTimeConfig;
-    typedef Singleton<DisplayConfig>            gDisplayConfig;
-    typedef Singleton<SDLConfig>                gSDLConfig;
-    typedef Singleton<TextureSystem>            gTextureSystem;
+    typedef Singleton<TimeConfig>                       gTimeConfig;
+    typedef Singleton<DisplayConfig>                    gDisplayConfig;
+    typedef Singleton<SDLConfig>                        gSDLConfig;
+    typedef Singleton<TextureSystem>                    gTextureSystem;
+    typedef Singleton<FontSystem>                       gFontSystem;
+    typedef Singleton<AnimationSystem>                  gAnimationSystem;
 
-    typedef std::map< std::string, Scene*>      ScenePtrMap;
-    typedef ScenePtrMap::iterator               ScenePtrMapIt;
-    typedef ScenePtrMap::const_iterator         ScenePtrMapItC;
+    typedef boost::unordered_map< std::string, Scene*>  ScenePtrMap;
+    typedef ScenePtrMap::iterator                       ScenePtrMapIt;
+    typedef ScenePtrMap::const_iterator                 ScenePtrMapItC;
 
-    typedef std::map<std::string, Texture*>     TexturePtrMap;
-    typedef TexturePtrMap::iterator             TexturePtrMapIt;
-    typedef TexturePtrMap::const_iterator       TexturePtrMapItC;
+    typedef boost::unordered_map<std::string, Texture*> TexturePtrMap;
+    typedef TexturePtrMap::iterator                     TexturePtrMapIt;
+    typedef TexturePtrMap::const_iterator               TexturePtrMapItC;
 
-    typedef std::vector<Decoration*>            DecorationVector;
-    typedef DecorationVector::iterator          DecorationVectorIt;
-    typedef DecorationVector::const_iterator    DecorationVectorItC;
+    typedef boost::unordered_map<std::string,TTF_Font*> FontPtrMap;
+    typedef FontPtrMap::iterator                        FontPtrMapIt;
+    typedef FontPtrMap::const_iterator                  FontPtrMapItC;
 
-    typedef std::map<unsigned int, Point>       PointMap;
-    typedef PointMap::iterator                  PointMapIt;
-    typedef PointMap::const_iterator            PointMapItC;
+    typedef std::vector<Decoration*>                    DecorationVector;
+    typedef DecorationVector::iterator                  DecorationVectorIt;
+    typedef DecorationVector::const_iterator            DecorationVectorItC;
 
-    typedef Factory<Scene>                      SceneFactory;
+    typedef boost::unordered_map<unsigned int, Point>   PointMap;
+    typedef PointMap::iterator                          PointMapIt;
+    typedef PointMap::const_iterator                    PointMapItC;
 
-    typedef Event<SDL_Event>                    InputEvent;
+    typedef Factory<Scene>                              SceneFactory;
 
-    typedef std::vector<SDL_Rect>               RectVector;
+    typedef Event<SDL_Event>                            InputEvent;
 
+    typedef std::vector<SDL_Rect>                       RectVector;
+
+    typedef std::auto_ptr<AvgFPS>                       AvgFPSPtr;
+
+    typedef std::vector<SDL_Rect>                       RectVector;
+    typedef RectVector::iterator                        RectVectorIt;
+    typedef RectVector::const_iterator                  RectVectorItC;
+
+    typedef boost::unordered_map<std::string, AnimationDesc*>    AnimDescPtrMap;
+    typedef AnimDescPtrMap::iterator                             AnimDescPtrMapIt;
+    typedef AnimDescPtrMap::const_iterator                       AnimDescPtrMapItC;
 
     struct RGB
     {
@@ -120,6 +145,7 @@ namespace core
 
     static Point sOriginPoint  = { 0, 0 };
     static RGB   sWhiteColor   = { 0xFF, 0xFF, 0xFF };
+    static RGB   sBlackColor   = { 0x00, 0x00, 0x00 };
 
 
     //

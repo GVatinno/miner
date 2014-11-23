@@ -42,8 +42,10 @@ namespace core
     private:
 
         void            playGameLoop();
+        void            drawAvgFps();
 
         bool            m_gameIsRunning;
+        AvgFPSPtr       m_avgFps;
        
 
     };

@@ -18,10 +18,14 @@ namespace core
     {
     public:
 
+                        Texture( const RGB& key );
                         Texture( const std::string& filename, const RGB& key );
+
                         ~Texture();
 
         void            load();
+        void            loadFromText( const  std::string& text, const std::string& fontName );
+        
         bool            isValid() const;
         void            draw( int x, int y, SDL_Rect* clip = NULL );
 

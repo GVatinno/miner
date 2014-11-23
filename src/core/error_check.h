@@ -33,10 +33,14 @@
 #define DEBUG_MSG( msg )                                                        \
     printf( "DEBUG: %s \n", msg);                                               \
 
+#define DEBUG_CALL( call )                                                      \
+    call;                                                                       \
+
 #else
 
 #define DEBUG_ASSERT( condition )
 #define DEBUG_MSG( msg )
+#define DEBUG_CALL( call )
 
 #endif                                                                          \
 

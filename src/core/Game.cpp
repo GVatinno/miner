@@ -13,12 +13,14 @@
 #include "SceneManager.h"
 #include "Event.h"
 #include "error_check.h"
+#include "fps.h"
+#include "Texture.h"
 
 namespace core 
 {
     Game::Game() 
     : m_sceneManagerPtr( SceneManager::create() ),
-      m_gameIsRunning(false)
+      m_gameIsRunning(false), m_avgFps( new AvgFPS() )
       
     {
 
@@ -44,9 +46,10 @@ namespace core
 
         unsigned short loops = 0;
         Uint32 next_game_tick = SDL_GetTicks();
-        
+        Uint32 start_tick = SDL_GetTicks();
         while( m_gameIsRunning ) 
         {
+            
             SDL_Event e;
             while( SDL_PollEvent( &e ) != 0 )
             {
@@ -61,8 +64,10 @@ namespace core
                 next_game_tick += skip_ticks;
                 loops++;
             }
-
             draw();
+            
+            m_avgFps->addTick( SDL_GetTicks() - start_tick );
+            start_tick = SDL_GetTicks();
         }
     }
 
@@ -108,8 +113,25 @@ namespace core
 
     void Game::draw()
     {
+        SDL_RenderClear( gSDLConfig::instance().getRenderer() );
         DEBUG_ASSERT( m_sceneManagerPtr->getCurrentScenePtr() != NULL )
+        
         m_sceneManagerPtr->draw();
+        DEBUG_CALL(drawAvgFps());
+        
+        SDL_RenderPresent( gSDLConfig::instance().getRenderer() );
+        
+    }
+
+
+    void Game::drawAvgFps()
+    {
+        
+        std::stringstream timeText;
+        timeText << m_avgFps->getAvgFramePerSecond();
+        Texture fps_texture(sBlackColor);
+        fps_texture.loadFromText(timeText.str() , "lazy-15");
+        fps_texture.draw(0,0);
     }
 
 
