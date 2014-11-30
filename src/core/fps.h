@@ -12,11 +12,11 @@
 #include "core.h"
 #include "NonCopyable.h"
 
-#define AVGFPS_MAX_TICK_VALUES 100
+#define AVGFPS_MAX_TICK_VALUES 10
 
 namespace core 
 {
-    class AvgFPS: public NonCopyable
+    class AvgFPS: private NonCopyable
     {
     public:
 

@@ -17,7 +17,7 @@ namespace core
 {
 
     template<class T>
-    class PointerTable : public NonCopyable
+    class PointerTable : private NonCopyable
     {
     public:
 

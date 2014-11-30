@@ -28,7 +28,7 @@ namespace miner
         K_GRIDSTATE_REFILLING_GRID
    };
 
-   class GridModel: public NonCopyable
+   class GridModel: private NonCopyable
    {
 
     //

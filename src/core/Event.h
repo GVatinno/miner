@@ -15,7 +15,7 @@
 namespace core 
 {
     template< class T >
-    class Event : public NonCopyable
+    class Event : private NonCopyable
     {
     public:
                         Event( const T& e) : m_event(e), m_consumed(false)      {}

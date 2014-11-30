@@ -18,7 +18,7 @@
 namespace miner 
 {
 
-   class GridView: public NonCopyable
+   class GridView: private NonCopyable
    {
 
 

@@ -14,7 +14,7 @@
 
 namespace core 
 {
-   class IGameObject: public NonCopyable
+   class IGameObject: private NonCopyable
    {
    public:
 

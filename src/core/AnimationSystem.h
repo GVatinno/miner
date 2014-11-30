@@ -20,7 +20,7 @@ namespace core
         RectVector   frameDesc;
     };
 
-    class AnimationSystem: public NonCopyable
+    class AnimationSystem: private NonCopyable
     {
     public:
                                 ~AnimationSystem();

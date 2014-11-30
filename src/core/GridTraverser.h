@@ -25,14 +25,14 @@ namespace core
     };
 
     
-    class GridVisitor : public NonCopyable
+    class GridVisitor : private NonCopyable
     {
     public:
         virtual bool visit( int x, int y ) = 0;
     };
 
 
-    class DirectionalGridTraverser: public NonCopyable
+    class DirectionalGridTraverser: private NonCopyable
     {
     public:
                 DirectionalGridTraverser( GridDirection dir, GridVisitor* visitor,
@@ -63,7 +63,7 @@ namespace core
     };
 
 
-    class GridTraverser: public NonCopyable
+    class GridTraverser: private NonCopyable
     {
     public:
                 GridTraverser( GridVisitor* visitor,

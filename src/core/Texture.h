@@ -14,7 +14,7 @@
 namespace core 
 {
 
-    class Texture: public NonCopyable
+    class Texture: private NonCopyable
     {
     public:
 

@@ -15,7 +15,7 @@
 namespace core 
 {
 
-    class Decoration: public NonCopyable
+    class Decoration: private NonCopyable
     {
 
     public:

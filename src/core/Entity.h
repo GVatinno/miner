@@ -13,7 +13,7 @@
 
 namespace core 
 {
-   class Entity: public NonCopyable
+   class Entity: private NonCopyable
    {
 
 

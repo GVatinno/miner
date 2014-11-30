@@ -13,7 +13,7 @@
 
 namespace core 
 {
-    class TextureSystem: public NonCopyable
+    class TextureSystem: private NonCopyable
     {
     public:
                                 ~TextureSystem();

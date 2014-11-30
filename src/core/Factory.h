@@ -15,7 +15,7 @@
 namespace core 
 {
     template< class T >
-    class Factory : public NonCopyable
+    class Factory : private NonCopyable
     {
     public:
         

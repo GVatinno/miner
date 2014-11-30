@@ -17,7 +17,7 @@
 namespace miner 
 {
 
-   class GridController: public NonCopyable
+   class GridController: private NonCopyable
    {
     public:
                         GridController( GridModel* model, GridView* view );

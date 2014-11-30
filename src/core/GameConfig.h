@@ -18,7 +18,7 @@ namespace core
     // TimeConfig
     //
 
-    class TimeConfig: public NonCopyable
+    class TimeConfig: private NonCopyable
     {
     public:
                                 ~TimeConfig()                                   { }
@@ -45,7 +45,7 @@ namespace core
     //
     // DisplayConfig
     //
-    class DisplayConfig : public NonCopyable
+    class DisplayConfig : private NonCopyable
     {
     protected:
                                 
@@ -91,7 +91,7 @@ namespace core
     //
     // SDLConfig
     //
-    class SDLConfig : public NonCopyable
+    class SDLConfig : private NonCopyable
     {
     public:
                                 ~SDLConfig();

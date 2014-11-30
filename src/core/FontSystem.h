@@ -13,7 +13,7 @@
 
 namespace core 
 {
-    class FontSystem: public NonCopyable
+    class FontSystem: private NonCopyable
     {
     public:
                                 ~FontSystem();
